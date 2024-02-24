@@ -20,15 +20,15 @@ import HelloWorld from './components/HelloWorld.vue'
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
 
               <li class="nav-item">
-                <router-link class="nav-link active"  to="/">Home</router-link>
+                <router-link class="nav-link active"  to="/">Students</router-link>
               </li>
 
               <li class="nav-item">
-                <router-link class="nav-link" to="/about">About Us</router-link>
+                <router-link class="nav-link" to="/create">Creat</router-link>
               </li>
 
               <li class="nav-item">
-                <router-link class="nav-link" to="/students">Students</router-link>
+                <router-link class="nav-link" to="/edit">Edit</router-link>
               </li>
 
             </ul>
