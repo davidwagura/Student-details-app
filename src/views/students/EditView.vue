@@ -1,82 +1,87 @@
 <template>
-    <div class="card">
-        <div class="card-header">
-            <h4>
-                Students
-                <router-link to="/student/create" class="btn btn-primary float-end">
-                    Add Student
-                </router-link>
-            </h4>
-        </div>
-        <div class="card-body">
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Age</th>
-                        <th>Admission number</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="student in students" :key="student">
-                        <td>{{ student.id }}</td>
-                        <td>{{ student.first_name }}</td>
-                        <td>{{ student.last_name }}</td>
-                        <td>{{ student.age }}</td>
-                        <td>{{ student.admission_number }}</td>
+  <div class="container mt-5">
+      <div class="card">
+          <div class="card-header">
+             <h4>Add Student</h4> 
+          </div>
+          <div class="card-admission_number">
+              <div class="mb-3">
+                  <form>
+                      <div>
+                          <label for="first_name">First Name:</label>
+                          <input type="text" id="first_name" v-model="formData.first_name" />
+                      </div>
+                      <div>
+                          <label for="admission_number">Last Name:</label>
+                          <input id="admission_number" v-model="formData.last_name">
+                      </div>
+                      <div>
+                          <label for="age">Age:</label>
+                          <input id="age" v-model="formData.age">
+                      </div>
+                      <div>
+                          <label for="admission_number">Admission Number:</label>
+                          <input id="admission_number" v-model="formData.admission_number">
+                      </div>
 
-                        <td>
-                        <router-link :to="'/update/' + article.id">Edit</router-link>
-                        </td>
-                        <td>
-                        <button @click="deleteItem()">Delete</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
+              
+                      <button type="button" @click="submitForm()">Submit</button>
+                  </form>
+              </div>
+          </div>
+      </div>
+  </div>
 </template>
-  
+
 <script>
-  import axios from 'axios';
-  
-  export default {
-    name: 'StudentsView',
+import axios from 'axios';
+export default {
+name: 'EditItem',
 
-    data() {
-      return {
-        formData: null
-      };
-    },
+data() {
+  return {
+    formData: {
+      first_name: '',
+      last_name: '',
+      age: '',
+      admission_number: '',
 
-    created() {
-      this.listStudents()
-    },
 
-      methods: {
-        listStudents() {
-          axios.get('http://127.0.0.1:8000/api/articles')
-          .then(response => {
-            console.log(response.data)
-            this.formData = response.data;
-            console.log(this.formData)
-          });
-        },
-          deleteItem(id) {
-            axios.delete(`http://127.0.0.1:8000/api/articles/${id}`)
+      },
+  };
+},
+created() {
+    const id = this.$route.params.id;
+    axios.get(`http://127.0.0.1:8000/api/student/${id}`)
+    .then(response => {
+      console.log('response');
+        let res = response.data;
+        this.formData.first_name = response.first_name;
+        this.formData.last_name = response.last_name;
+        this.formData.age = response.age;
+        this.formData.admission_number = response.admission_number;
 
-            .then( response => {
-              this.formData();
-              return response
-            })
-          
-        }
-        
+      
+      return response
+    });
+  },
+  methods: {
+
+    submitForm() {
+      const id = this.$route.params.id;
+      axios.put(`http://127.0.0.1:8000/api/student/${id}`, this.formData)
+        .then(response => {
+          this.formData.first_name = response.data.first_name;
+        this.formData.last_name = response.data.last_name;
+        this.formData.age = response.data.age;
+        this.formData.admission_number = response.data.admission_number;
+          console.log(response.data)
+        });
     }
-  }
+
+  },
+};
+
 </script>
+
+  

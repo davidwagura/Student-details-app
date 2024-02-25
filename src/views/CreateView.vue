@@ -13,7 +13,7 @@
                         </div>
                         <div>
                             <label for="admission_number">Last Name:</label>
-                            <textarea id="admission_number" v-model="formData.admission_number"></textarea>
+                            <input id="admission_number" v-model="formData.last_name">
                         </div>
                         <div>
                             <label for="age">Age:</label>
@@ -21,7 +21,7 @@
                         </div>
                         <div>
                             <label for="admission_number">Admission Number:</label>
-                            <textarea id="admission_number" v-model="formData.admission_number"></textarea>
+                            <input id="admission_number" v-model="formData.admission_number">
                         </div>
 
                 
@@ -42,7 +42,7 @@ export default {
     return {
       formData: {
         first_name: '',
-        admission_number: '',
+        last_name: '',
         age: '',
         admission_number: '',
 
@@ -57,7 +57,7 @@ export default {
         console.log('response');
         
           this.formData.first_name = ""
-          this.formData.admission_number = ""
+          this.formData.last_name = ""
           this.formData.age = ""
           this.formData.admission_number = ""
 
