@@ -37,6 +37,7 @@
                   </tr>
               </tbody>
           </table>
+          {{ formData }}
       </div>
   </div>
 </template>
@@ -49,8 +50,8 @@ export default {
 
   data() {
     return {
-      students: []
-    };
+      formData: null
+  };
   },
 
   created() {
@@ -61,13 +62,25 @@ export default {
       listStudents() {
         axios.get('http://127.0.0.1:8000/api/student')
         .then(response => {
+          console.log(response.data)
           this.formData = response.data;
           console.log(this.students);
 
-          return response
         });
       },
       
-   }
+   },
+   deleteItem(id) {
+            axios.delete(`http://127.0.0.1:8000/api/student/${id}`)
+
+            .then( response => {
+              this.formData();
+              return response
+            })
+          
+        }
+        
+    }
+
 }
 </script>
