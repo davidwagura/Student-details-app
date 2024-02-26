@@ -9,19 +9,19 @@
                   <form>
                       <div>
                           <label for="first_name">First Name:</label>
-                          <input type="text" id="first_name" v-model="formData.first_name" />
+                          <input type="text" id="first_name" class="form-control" v-model="formData.first_name" />
                       </div>
                       <div>
                           <label for="admission_number">Last Name:</label>
-                          <input id="admission_number" v-model="formData.last_name">
+                          <input id="admission_number" class="form-control" v-model="formData.last_name">
                       </div>
                       <div>
                           <label for="age">Age:</label>
-                          <input id="age" v-model="formData.age">
+                          <input id="age" class="form-control" v-model="formData.age">
                       </div>
                       <div>
                           <label for="admission_number">Admission Number:</label>
-                          <input id="admission_number" v-model="formData.admission_number">
+                          <input id="admission_number" class="form-control" v-model="formData.admission_number">
                       </div>
 
               
@@ -61,9 +61,7 @@ created() {
         this.formData.age = res.age;
         this.formData.admission_number = res.admission_number;
 
-      
-      return response
-    });
+        });
   },
   methods: {
 
