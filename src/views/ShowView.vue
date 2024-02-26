@@ -29,7 +29,7 @@
                       <td>{{ student.age }}</td>
                       <td>{{ student.admission_number }}</td>
                       <td>
-                        <router-link :to="'/edit' + student.id">Edit</router-link>
+                        <router-link :to="'/edit/' + student.id">Edit</router-link>
                       </td>
                       <td>
                         <button @click="deleteItem()">Delete</button>
@@ -50,7 +50,7 @@ export default {
 
   data() {
     return {
-      formData: null
+      students: []
   };
   },
 
@@ -62,8 +62,8 @@ export default {
       listStudents() {
         axios.get('http://127.0.0.1:8000/api/student')
         .then(response => {
-          console.log(response.data)
-          this.formData = response.data;
+          // console.log(response.data)
+          this.students = response.data;
           console.log(this.students);
 
         });
@@ -82,5 +82,4 @@ export default {
         
     }
 
-}
 </script>

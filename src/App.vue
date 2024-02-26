@@ -28,7 +28,7 @@ import HelloWorld from './components/HelloWorld.vue'
               </li>
 
               <li class="nav-item">
-                <router-link class="nav-link" to="/edit">Edit</router-link>
+                <router-link class="nav-link" to="/edit/">Edit</router-link>
               </li>
 
             </ul>

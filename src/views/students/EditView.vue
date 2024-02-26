@@ -2,7 +2,7 @@
   <div class="container mt-5">
       <div class="card">
           <div class="card-header">
-             <h4>Add Student</h4> 
+             <h4>Edit Student</h4> 
           </div>
           <div class="card-admission_number">
               <div class="mb-3">
@@ -25,7 +25,7 @@
                       </div>
 
               
-                      <button type="button" @click="submitForm()">Submit</button>
+                      <button type="button" @click="updateForm()">Update</button>
                   </form>
               </div>
           </div>
@@ -54,12 +54,12 @@ created() {
     const id = this.$route.params.id;
     axios.get(`http://127.0.0.1:8000/api/student/${id}`)
     .then(response => {
-      console.log('response');
+      // console.log('response');
         let res = response.data;
-        this.formData.first_name = response.first_name;
-        this.formData.last_name = response.last_name;
-        this.formData.age = response.age;
-        this.formData.admission_number = response.admission_number;
+        this.formData.first_name = res.first_name;
+        this.formData.last_name = res.last_name;
+        this.formData.age = res.age;
+        this.formData.admission_number = res.admission_number;
 
       
       return response
@@ -67,16 +67,17 @@ created() {
   },
   methods: {
 
-    submitForm() {
+    updateForm() {
       const id = this.$route.params.id;
       axios.put(`http://127.0.0.1:8000/api/student/${id}`, this.formData)
         .then(response => {
           this.formData.first_name = response.data.first_name;
-        this.formData.last_name = response.data.last_name;
-        this.formData.age = response.data.age;
-        this.formData.admission_number = response.data.admission_number;
+          this.formData.last_name = response.data.last_name;
+          this.formData.age = response.data.age;
+          this.formData.admission_number = response.data.admission_number;
           console.log(response.data)
         });
+        this.$router.push('/');
     }
 
   },

@@ -36,7 +36,7 @@
 <script>
 import axios from 'axios';
 export default {
-  name: 'CreatItem',
+  name: 'CreatView',
   
   data() {
     return {
@@ -45,16 +45,14 @@ export default {
         last_name: '',
         age: '',
         admission_number: '',
-
-
         },
     };
   },
   methods: {
     submitForm() {
-      axios.post('http://127.0.0.1:8000/api/student', this.formData)
+      axios.post('http://127.0.0.1:8000/api/student ', this.formData)
       .then(response => {
-        console.log('response');
+        console.log(response.data);
         
           this.formData.first_name = ""
           this.formData.last_name = ""
