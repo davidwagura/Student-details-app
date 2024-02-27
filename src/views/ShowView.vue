@@ -32,12 +32,11 @@
                         <router-link :to="'/edit/' + student.id">Edit</router-link>
                       </td>
                       <td>
-                        <button @click="deleteItem()">Delete</button>
+                        <button @click.prevent="deleteItem(student.id)">Delete</button>
                       </td>
                   </tr>
               </tbody>
           </table>
-          {{ formData }}
       </div>
   </div>
 </template>
@@ -68,18 +67,19 @@ export default {
 
         });
       },
-      
-   },
-   deleteItem(id) {
-            axios.delete(`http://127.0.0.1:8000/api/student/${id}`)
+      deleteItem(id) {
+        axios.delete(`http://127.0.0.1:8000/api/student/${id}`)
 
-            .then( response => {
-              this.formData();
-              return response
-            })
+        .then( response => {
+        console.log(response);
+
+        this.listStudents();
+        })
           
-        }
+      }
+
+   },
         
-    }
+}
 
 </script>
